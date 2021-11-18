@@ -20,10 +20,6 @@ namespace BankingApi.Controllers
         }
 
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
 
         [HttpGet]
         public string Get(int accno,string pswd,float amount,int orderId)
@@ -32,7 +28,7 @@ namespace BankingApi.Controllers
             var user = _dbContext.Banks.Where(x => x.ACC_NO == accno).FirstOrDefault();
             if (user == null)
               return "Incorrect Account Number";
-            if(!String.Equals(user.Password,pswd, StringComparison.OrdinalIgnoreCase))
+            if(!String.Equals(user.Password,pswd))
                 return "pswdfail";
             if (user.Amount > amount)
                 user.Amount -= amount;
