@@ -28,7 +28,7 @@ namespace BankingApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BankContext>(option=>option.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BankApi;"));
+            services.AddDbContext<BankContext>(option=>option.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

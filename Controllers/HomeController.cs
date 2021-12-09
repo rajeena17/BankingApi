@@ -22,22 +22,22 @@ namespace BankingApi.Controllers
 
 
         [HttpGet]
-        public string Get(int accno,string pswd,float amount,int orderId)
+        public string Get(int accno, string pswd, float amount, int orderId)
         {
 
             var user = _dbContext.Banks.Where(x => x.ACC_NO == accno).FirstOrDefault();
             if (user == null)
-              return "Incorrect Account Number";
-            if(!String.Equals(user.Password,pswd))
+                return "Incorrect Account Number";
+            if (!String.Equals(user.Password, pswd))
                 return "pswdfail";
             if (user.Amount > amount)
                 user.Amount -= amount;
             else
                 return "Insufficient Balance";
 
-            var vizcartAdmin = _dbContext.Banks.Where(x=>x.ACC_NO==100000001).FirstOrDefault();
+            var vizcartAdmin = _dbContext.Banks.Where(x => x.ACC_NO == 100000001).FirstOrDefault();
             vizcartAdmin.Amount += amount;
-            int i= _dbContext.SaveChanges();
+            int i = _dbContext.SaveChanges();
             if (i == 2)
             {
                 return "Successful";
@@ -48,9 +48,14 @@ namespace BankingApi.Controllers
                 return "Failed";
 
             }
-           
-
         }
+
+
+            //public string Hello()
+            //{
+            //    return "Hi vatsa";
+            //}
+        
     }
 }
 
